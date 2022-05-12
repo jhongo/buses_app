@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
         'lineas':(context) => const LineasScreen(),
         'perfil': (context) => const PerfilScreen(),
         'select':(context) => const SelectAvatarScreen(),
+        'navbar':(context) => const NavBarScreen()
       },
     );
   }
