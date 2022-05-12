@@ -38,7 +38,7 @@ class ContainerSearch extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       width: size.width * 0.9,
-      height: size.height * 0.75,
+      height: size.height * 0.70,
       color: const Color(0xffEBE9D9), 
       child: Column(
         children: [
