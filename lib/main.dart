@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  MaterialApp(
       title: 'Material App',
-      initialRoute: 'select',
+      initialRoute: 'register',
       debugShowCheckedModeBanner: false,
       routes: {
         'register': (context) => const  RegisterScreen(),
