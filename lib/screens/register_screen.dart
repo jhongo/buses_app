@@ -33,7 +33,7 @@ class RegisterScreen extends StatelessWidget {
               height: 25,
             ),
             GestureDetector(
-              onTap: () => Navigator.pushNamed(context, 'home'),
+              onTap: () => Navigator.pushNamed(context, 'navbar'),
               child: Container(
                 width: 320,
                 height: 50,
@@ -68,7 +68,7 @@ class RegisterScreen extends StatelessWidget {
               height: 15,
             ),
             GestureDetector(
-              onTap: () => Navigator.pushNamed(context, 'home'),
+              onTap: () => Navigator.pushNamed(context, 'navbar'),
               child: Container(
                 width: 320,
                 height: 50,

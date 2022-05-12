@@ -44,20 +44,20 @@ class _ButtonNavBar extends StatelessWidget {
         BottomNavyBarItem(
           
           icon: FaIcon(FontAwesomeIcons.bus),
-          title:Text('Mi bus'), 
+          title:Text('Mi bus', style: TextStyle(fontFamily: 'Poppins'),), 
           activeColor:  Color(0xffEA5055),
           inactiveColor: Color(0xff294171),
            ),
 
         BottomNavyBarItem(
           icon: FaIcon(FontAwesomeIcons.linesLeaning), 
-          title:Text('Líneas'),  
+          title:Text('Líneas', style: TextStyle(fontFamily: 'Poppins')),  
           activeColor: Color(0xffEA5055),
           inactiveColor: Color(0xff294171), ),
         
         BottomNavyBarItem(
           icon: FaIcon(FontAwesomeIcons.map), 
-          title:Text('Mapa'),  
+          title:Text('Mapa', style: TextStyle(fontFamily: 'Poppins')),  
           activeColor: Color(0xffEA5055),
           inactiveColor: Color(0xff294171), ),
       ], 

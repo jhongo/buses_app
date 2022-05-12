@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:card_swiper/card_swiper.dart';
 
 class SelectAvatarScreen extends StatelessWidget {
    
@@ -84,9 +85,18 @@ class _sliderContainer extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 280,
-      color: Colors.white,
-      child: const Center(child: Text('Aquí va el Slider', style: TextStyle(fontSize: 20),)),
-
+      child: Swiper(
+      itemCount: 10,
+      viewportFraction: 0.7,
+      scale: 0.8,
+      
+      itemBuilder: (BuildContext context, int index) {
+        return Image.network(
+          "https://via.placeholder.com/222x122",
+        fit: BoxFit.fill,
+        );
+      },
+),
      );
   }
 }
