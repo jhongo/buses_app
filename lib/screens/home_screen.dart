@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -39,6 +40,70 @@ class ContainerSearch extends StatelessWidget {
       width: size.width * 0.9,
       height: size.height * 0.75,
       color: const Color(0xffEBE9D9), 
+      child: Column(
+        children: [
+          const SizedBox(height: 20,),
+          Container(
+            height: 50,
+            width: 300,
+            //  color: Colors.white,
+            alignment: Alignment.bottomRight,
+            child: const Text('¿A dónde quiere ir?', 
+            style:  TextStyle(color:  Color(0xffEA5055), fontSize: 18, fontWeight: FontWeight.bold),)
+            ),
+            const SizedBox(height: 20),
+            Container(
+              width: 300,
+              height: 60,
+              
+              decoration: const BoxDecoration(
+                color:  Color(0xffEBE9D9),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(2,2),
+                    blurRadius: 5,
+                    spreadRadius: 2
+
+                  )
+                ]
+
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 60,
+                    height: 60,
+                    child: const Icon(
+                      Icons.search,
+                       size: 30,
+                        color: Color(0xffEA5055),
+                    ),
+                  ),
+                  Container(
+                    // color: Colors.white,
+                    width: 240,
+
+
+                  )
+                ],
+              ),
+
+            ),
+            const SizedBox(height: 20,),
+            Container(
+              width: 400,
+              height: 350,
+              alignment: Alignment.topCenter,
+              // color: Colors.white,
+              child: Image.asset('assets/imgs/church.png'),
+            ),
+
+
+        ],
+
+
+      ),
       
       
     );
