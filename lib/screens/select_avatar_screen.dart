@@ -38,21 +38,24 @@ class _Botones extends StatelessWidget {
       // color: Colors.white,
       child: Row(
         children:[
-          Container(
-            width: 80,
-            height: 50,
-            alignment: Alignment.center,
-            color: Colors.black12,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text('Omitir',style: TextStyle(fontSize: 17,  ),),
-                Icon(
-              Icons.arrow_forward_ios_rounded,size: 16,
-            )
-              ],
-            )
-
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, 'navbar'),
+            child: Container(
+              width: 80,
+              height: 50,
+              alignment: Alignment.center,
+              color: Colors.black12,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text('Omitir',style: TextStyle(fontSize: 17,  ),),
+                  Icon(
+                Icons.arrow_forward_ios_rounded,size: 16,
+              )
+                ],
+              )
+          
+            ),
           ),
          
           const SizedBox( width: 59,),
