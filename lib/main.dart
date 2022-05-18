@@ -8,22 +8,25 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return  MultiProvider(
+    return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => NavBarService(),)
+        ChangeNotifierProvider(
+          create: (context) => NavBarService(),
+        )
       ],
       child: MaterialApp(
         title: 'Material App',
-        initialRoute: 'register',
+        initialRoute: 'navbar',
         debugShowCheckedModeBanner: false,
         routes: {
-          'register': (context) => const  RegisterScreen(),
-          'home' :(context) => const HomeScreen(),
+          'register': (context) => const RegisterScreen(),
+          'home': (context) => const HomeScreen(),
           'mapa': (context) => const MapaScreen(),
-          'lineas':(context) => const LineasScreen(),
+          'lineas': (context) => const LineasScreen(),
           'perfil': (context) => const PerfilScreen(),
-          'select':(context) => const SelectAvatarScreen(),
-          'navbar':(context) => const NavBarScreen()
+          'select': (context) => const SelectAvatarScreen(),
+          'navbar': (context) => const NavBarScreen(),
+          'destino': (context) => DestinoScreen()
         },
       ),
     );
