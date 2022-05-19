@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Material App',
-        initialRoute: 'navbar',
+        initialRoute: 'register',
         debugShowCheckedModeBanner: false,
         routes: {
           'register': (context) => const RegisterScreen(),
