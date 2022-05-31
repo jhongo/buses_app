@@ -14,7 +14,7 @@ class _MapaScreenState extends State<MapaScreen> {
 
   MapboxMapController? mapController;
   final direction = LatLng(-2.897594, -79.019844);
-  final selectedStyle = 'mapbox://styles/johnca/cl3c1nry1005p15jyumgx2lin';
+  final selectedStyle = 'mapbox://styles/johnca/cl0m176mv000014qc555ktv15';
   var isLight = true;
 
   _onMapCreated(MapboxMapController controller ){
@@ -26,7 +26,7 @@ class _MapaScreenState extends State<MapaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: createMap() 
+      body: createMap(),
     );
   }
 
@@ -41,5 +41,21 @@ class _MapaScreenState extends State<MapaScreen> {
           ),
         // onStyleLoadedCallback: _onStyleLoadedCallback,
       );
+  }
+}
+
+class _OptionsParada extends StatelessWidget {
+  const _OptionsParada({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 300,
+      height: 150,
+      color: Colors.indigo,
+      
+    );
   }
 }

@@ -1,114 +1,110 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        color: Color(0xffEA5055),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        width:size.width,
+        height: size.height,
+        child: CustomPaint(
+          painter: BackgroundRegister(),
+          child: Column(
+            children:const [
+              SizedBox(height: 400,),
+              _TextContinue(),
+              SizedBox(height: 50,),
+              _TagRegister(text: 'Continuar con Facebook', icon: FontAwesomeIcons.facebookF, ),
+              SizedBox(height: 30,),
+              _TagRegister(text: 'Continuar con Google', icon: FontAwesomeIcons.google,),
+              SizedBox(height: 30,),
+              Text('Registrarme', style: TextStyle(color: Color(0xff294171),fontSize: 17 ),)
+            ],
+          ),
+        ),
+      )
+    );
+  }
+}
+
+class _TagRegister extends StatelessWidget {
+  
+  final String text;
+  final IconData icon;
+  
+  const _TagRegister({
+    Key? key, required this.text, required this.icon,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+
+      onTap: () {
+        Navigator.pushReplacementNamed(context, 'select');
+      },
+      child: Container(
+        width: 320,
+        height: 65,
+        decoration: BoxDecoration(
+          color: Color(0xff294171),
+          borderRadius: BorderRadius.circular(5)
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const SizedBox(
-              height: 90,
-            ),
-            const CircleAvatar(
-              radius: 130,
-              backgroundImage: NetworkImage(
-                  'https://i.pinimg.com/736x/21/20/b0/2120b058cb9946e36306778243eadae5.jpg'),
-              backgroundColor: Colors.grey,
-            ),
-            const SizedBox(
-              height: 90,
-            ),
-            const Text(
-              '¿Cómo quieres continuar?',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            GestureDetector(
-              onTap: () => Navigator.pushNamed(context, 'select'),
-              child: Container(
-                width: 320,
-                height: 50,
-                color: Colors.red[700],
-                child: Row(
-                  children: [
-                    Container(
-                      width: 70,
-                      height: 50,
-                      color: Colors.grey[300],
-                      child: Icon(
-                        Icons.facebook_outlined,
-                        size: 40,
-                        color: Colors.blue[600],
-                      ),
-                    ),
-                    Container(
-                      width: 250,
-                      color: Colors.white,
-                      alignment: Alignment.center,
-                      height: 50,
-                      child: const Text(
-                        'Continuar con Facebook',
-                        style: TextStyle(fontSize: 17),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            GestureDetector(
-              onTap: () => Navigator.pushNamed(context, 'navbar'),
-              child: Container(
-                width: 320,
-                height: 50,
-                color: Colors.red[700],
-                child: Row(
-                  children: [
-                    Container(
-                      width: 70,
-                      height: 50,
-                      color: Colors.grey[300],
-                      child: Icon(
-                        Icons.mark_email_unread_outlined,
-                        size: 40,
-                        color: Colors.blue[600],
-                      ),
-                    ),
-                    Container(
-                      width: 250,
-                      color: Colors.white,
-                      alignment: Alignment.center,
-                      height: 50,
-                      child: const Text(
-                        'Continuar con Google',
-                        style: TextStyle(fontSize: 17),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Text(
-              'Registrarse',
-              style: TextStyle(fontSize: 18),
-            ),
+            FaIcon(icon, color: Colors.white,),
+            Text( text, style: TextStyle(color: Colors.white, fontSize: 16),)
           ],
         ),
       ),
     );
   }
+}
+
+class _TextContinue extends StatelessWidget {
+  const _TextContinue({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text('¿Cómo quieres continuar?', style: TextStyle(color: Color(0xff294171),fontSize: 20, fontWeight: FontWeight.w800 ),),
+    );
+  }
+}
+
+
+
+
+class BackgroundRegister extends CustomPainter {
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    
+    final pencil = Paint();
+    pencil.color = Color(0xFF294171);
+    pencil.strokeWidth = 10;
+    pencil.style = PaintingStyle.fill;
+
+    final path = Path();
+    path.moveTo(0, 0);
+    path.lineTo(0, size.height * 0.40);
+    path.quadraticBezierTo(size.width * 0.5, size.height * 0.34 , size.width, size.height * 0.40);
+    path.lineTo(size.width,0);
+
+    canvas.drawPath(path, pencil);
+  
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+  
 }

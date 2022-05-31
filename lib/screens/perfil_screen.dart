@@ -1,156 +1,249 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PerfilScreen extends StatelessWidget {
-  const PerfilScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 40,
-            ),
-            Container(
-              
-              height: 50,
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, 'home'),
-                    child: Container(
-                      width: 60,
-                      color: Colors.white,
-                      height: 48,
-                      child: const Icon(
-                        Icons.arrow_back_ios,
-                        size: 22,
-                      ),
-                    ),
-                  ),
-                  Spacer(),
-                  Container(
-                    width: 120,
-                    height: 47,
-                   
-                    alignment: Alignment.center,
-                    child: const Text(
-                      'Mi perfil',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ],
+        height: size.height,
+        width: size.width,
+        child: CustomPaint(
+          painter: BackgroundPerfil(),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 35,
               ),
-            ),
-            const SizedBox(height: 40),
-            Container(
-              padding: const EdgeInsets.only(left: 30),
-              // color: Colors.black,
-
-              alignment: Alignment.centerLeft,
-              child: const CircleAvatar(
-                radius: 50,
-                backgroundImage: NetworkImage(
-                    'https://i.pinimg.com/736x/21/20/b0/2120b058cb9946e36306778243eadae5.jpg'),
+              _TextPerfil(),
+              SizedBox(
+                height: 180,
               ),
-            ),
-            const SizedBox(height: 30),
-            Container(
-                // color: Colors.amber,
-                width: double.infinity,
-                height: 60,
-                padding: const EdgeInsets.only(left: 30),
-                alignment: Alignment.centerLeft,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text('Kevin Gonzales',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold)),
-                    Text('keygon10@gmail.com', style: TextStyle(fontSize: 16))
-                  ],
-                )),
-            const SizedBox(height: 20),
-            Container(
-                // color: Colors.amber,
-                width: double.infinity,
-                height: 60,
-                padding: const EdgeInsets.only(left: 30),
-                alignment: Alignment.centerLeft,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text('idioma',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold)),
-                    Text('Español', style: TextStyle(fontSize: 16))
-                  ],
-                )),
-            const SizedBox(height: 20),
-            Container(
-                // color: Colors.amber,
-                width: double.infinity,
-                height: 60,
-                padding: const EdgeInsets.only(left: 30),
-                alignment: Alignment.centerLeft,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text('Consultar saldo',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold)),
-                    Text('Ingresa tu # de tarjeta',
-                        style: TextStyle(fontSize: 16))
-                  ],
-                )),
-            const SizedBox(
-              height: 20,
-            ),
-            Container(
-              width: double.infinity,
-              // color: Colors.black,
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.only(left: 30),
-              child: Column(
-              children: [
-                Container(
-                  width: 170,
-                  height: 50,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(5),
-                    
-                  ),
-                  child: const Text('Cerrar Sesión', style: TextStyle(fontSize: 17),),
-                ),
-               
-                
-              ],
-            )),
-             const SizedBox(height: 10),
-                Container(
-                  width: double.infinity,
-                  height: 213,
-                  
-                  //  color: Colors.amber,
-
-                  child: FadeInImage(
-                    placeholder: AssetImage('https://via.placeholder.com/100x100'), 
-                    image: NetworkImage('https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__340.jpg'),
-                    fit: BoxFit.cover,
-                    ),
-                   )
-          ],
+              _TagCuenta(
+                label: 'Mi cuenta',
+                textContent: 'keygonza10@gmail.com',
+              ),
+              SizedBox(height: 30,),
+              _NumCard(),
+              SizedBox(height: 90,),
+              _OpcPerfil(icon: Icons.exit_to_app,text: 'Cerrar sesión', ),
+              SizedBox(height: 35,),
+              _OpcPerfil(icon: Icons.help,text: 'Ayuda', )
+            ],
+          ),
         ),
       ),
     );
+  }
+}
+
+class _OpcPerfil extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  const _OpcPerfil({
+    Key? key, 
+    required this.icon, 
+    required this.text,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      child: Row(
+
+        children: [
+          Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+                color: Color(0xFFc4c7c5),
+                borderRadius: BorderRadius.circular(5)),
+            child: Icon(
+              icon,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(width: 25,),
+          Text(text, style: TextStyle(color: Color(0xff294171)),)
+        ],
+      ),
+    );
+  }
+}
+
+class _NumCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      child: Row(
+        children: [
+          Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+                color: Color(0xFFc4c7c5),
+                borderRadius: BorderRadius.circular(5)),
+            child: Icon(
+              Icons.monetization_on_outlined,
+              color: Colors.white,
+            ),
+          ),
+          MaterialButton(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Consultar mi saldo',
+                  style: TextStyle(
+                    color: Color(0xff294171),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text('Ingresa tu # de tarjeta',
+                    style: TextStyle(color: Colors.black45))
+              ],
+            ),
+            onPressed: () {
+              displayDialogIOS(context);
+            },
+          )
+        ],
+      ),
+    );
+  }
+}
+
+void displayDialogIOS(BuildContext context) {
+  showCupertinoDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: const Text('Ingresa tu número'),
+          content: Column(
+            // mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Contenido del AlertDialog'),
+              SizedBox(
+                height: 10,
+              ),
+              // Image.asset('assets/gifs/busin_gino.gif')
+            ],
+          ),
+          actions: [
+            TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text(
+                  'Cancelar',
+                  style: TextStyle(color: Colors.red),
+                )),
+            TextButton(
+                onPressed: () => Navigator.pop(context), child: Text('OK'))
+          ],
+        );
+      });
+}
+
+class _TagCuenta extends StatelessWidget {
+  final String label;
+  final String textContent;
+  final IconData icon;
+  const _TagCuenta({
+    Key? key,
+    required this.label,
+    required this.textContent,
+    this.icon = Icons.arrow_forward_ios,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      child: Row(
+        children: [
+          Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+                color: Color(0xFFc4c7c5),
+                borderRadius: BorderRadius.circular(5)),
+            child: Icon(
+              Icons.person,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(
+            width: 25,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: TextStyle(
+                    color: Color(0xff294171), fontWeight: FontWeight.bold),
+              ),
+              Text(
+                textContent,
+                style: TextStyle(color: Colors.black45),
+              ),
+            ],
+          ),
+          Spacer(),
+          Icon(
+            icon,
+            color: Color(0xff294171),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _TextPerfil extends StatelessWidget {
+  const _TextPerfil({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 30),
+        alignment: Alignment.centerRight,
+        width: double.infinity,
+        child: Text(
+          'Perfil',
+          style: TextStyle(color: Colors.white, fontSize: 20),
+        ),
+      ),
+    );
+  }
+}
+
+class BackgroundPerfil extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final pencil = Paint();
+    pencil.color = Color(0xff294171);
+    pencil.style = PaintingStyle.fill;
+    pencil.strokeWidth = 10;
+
+    final path = Path();
+    path.moveTo(0, 0);
+    path.lineTo(0, size.height * 0.15);
+    path.quadraticBezierTo(
+        size.width * 0.5, size.height * 0.4, size.width, size.height * 0.15);
+    path.lineTo(size.width, 0);
+
+    canvas.drawPath(path, pencil);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
   }
 }

@@ -1,70 +1,56 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:buses_tesis/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class HomeScreen extends StatelessWidget {
+   
   const HomeScreen({Key? key}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-        body: Container(
-      width: double.infinity,
-      height: double.infinity,
-      color: Color(0xffEA5055),
-      child: Stack(
-        children: const [
-          Positioned(top: 80, right: 0, child: _TitleHome()),
-          Positioned(right: 0, bottom: 0, child: ContainerSearch()),
-          Positioned(top: 150, left: 18, child: _CircleDecoration()),
-        ],
-      ),
-    ));
+      body: Container(
+        color: Color(0xFFecebd9),
+        width: size.width,
+        height: size.height,
+        child: CustomPaint(
+          painter: BackgroundPainter(),
+          child: Column(
+            children:const [
+              SizedBox(height: 65,),
+              HeaderHome(),
+              SizedBox(height: 85,),
+              _ContentSearch(),
+              SizedBox(height: 150,),
+              _ContainerImage()
+
+            ],
+          ),
+        ),
+      )
+    );
   }
 }
 
-class ContainerSearch extends StatelessWidget {
-  const ContainerSearch({
+class _ContainerImage extends StatelessWidget {
+  const _ContainerImage({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return SlideInUp(
+    return Expanded(
       child: Container(
-        width: size.width * 0.9,
-        height: size.height * 0.70,
-        color: const Color(0xffEBE9D9),
-        child: Column(
+        width: size.width,
+        height: size.height,
+        child: Stack(
+          alignment: Alignment.center,
           children: [
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-                height: 50,
-                width: 300,
-                //  color: Colors.white,
-                alignment: Alignment.bottomRight,
-                child: const Text(
-                  '¿A dónde quiere ir?',
-                  style: TextStyle(
-                      color: Color(0xffEA5055),
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
-                )),
-            const SizedBox(height: 20),
-            CustomSearch(),
-            const SizedBox(
-              height: 20,
-            ),
-            Container(
-              width: 400,
-              height: 350,
-              alignment: Alignment.topCenter,
-              // color: Colors.white,
-              child: Image.asset('assets/imgs/church.png'),
-            ),
+            Positioned( top: 15, child: _CircleBackground()),
+            FadeInUp(child: Image.asset('assets/imgs/catedral.png'))
           ],
         ),
       ),
@@ -72,54 +58,97 @@ class ContainerSearch extends StatelessWidget {
   }
 }
 
-class _CircleDecoration extends StatelessWidget {
-  const _CircleDecoration({
+class _CircleBackground extends StatelessWidget {
+  const _CircleBackground({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BounceInDown(
-      duration: Duration(milliseconds: 2000),
-      from: 100,
       child: Container(
-        width: 100,
-        height: 100,
+        width: 200,
+        height: 200,
         decoration: BoxDecoration(
-            color: const Color(0xffEBE9D9),
-            shape: BoxShape.circle,
-            border: Border.all(color: Color(0xffEA5055), width: 5)),
-      ),
-    );
-  }
-}
-
-class _TitleHome extends StatelessWidget {
-  const _TitleHome({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SlideInLeft(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: const [
-            Text(
-              'Kevin',
-              style: TextStyle(
-                  color: Colors.white, fontSize: 50, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              'Encontremos tu bus..',
-              style: TextStyle(
-                  color: Colors.white, fontSize: 20, fontWeight: FontWeight.w400),
-            ),
-          ],
+          color: Color(0xffea5055),
+          shape: BoxShape.circle
         ),
       ),
     );
   }
 }
+
+class _ContentSearch extends StatelessWidget {
+  const _ContentSearch({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: FadeInLeft(
+        child: Container(
+          width: size.width,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('¿A dónde quieres ir?', style: TextStyle(color: Color(0xFF294171),fontSize: 16, fontWeight: FontWeight.w800 ),),
+              SizedBox(height: 15,),
+              Container(
+                alignment: Alignment.centerLeft,
+                height: 50,
+                child: CustomSearch()
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class HeaderHome extends StatelessWidget {
+  const HeaderHome({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: FadeInLeft(
+        child: Container(
+          width: size.width,
+          height: size.height * 0.15,
+          child: Row(
+            children: [
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Kevin,', style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold, fontSize: 40),),
+                    Text('Encontremos tu bus..', style: TextStyle(color: Colors.white, fontSize: 18), ),
+                  ],
+                ),
+              ),
+              Spacer(),
+              CircleAvatar(
+                minRadius: 50,
+                backgroundColor: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: Image.asset('assets/imgs/bus-r4.png',height: 70),
+                ),
+              )
+      
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+

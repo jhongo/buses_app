@@ -1,132 +1,228 @@
-import 'package:buses_tesis/models/paradas_models.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:animate_do/animate_do.dart';
 
 class DestinoScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Scaffold(
-        body: Container(
-      width: size.width,
-      height: size.height,
-      color: const Color(0xffEBE9D9),
-      child: Stack(
-        children: [
-          Positioned(bottom: 0, child: BackgroundDestino()),
-          _HeaderDestino(),
-          Positioned(top: 130, child: _ParadaItem())
-          ],
-        ),
-       )
 
-    );
-
-    
-  }
-}
-
-class _ParadaItem extends StatelessWidget {
-  List parada = paradaTotems;
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Container(
-      width: size.width,
-      height: 150,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        physics: BouncingScrollPhysics(),
-        child: Row(
-          children: List.generate(
-              parada.length,
-              (index) => CircleParada(
-                    destino: parada[index],
+     void displayDialogIOS(BuildContext context) {
+    showCupertinoDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return CupertinoAlertDialog(
+            title: const Text('Titulo de Alerta'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Text('Contenido del AlertDialog'),
+                SizedBox(
+                  height: 10,
+                ),
+                FlutterLogo(
+                  size: 100,
+                )
+              ],
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child:const Text(
+                    'Cancelar',
+                    style: TextStyle(color: Colors.red),
                   )),
-        ),
-      ),
-    );
+              TextButton(
+                  onPressed: () => Navigator.pop(context), child: Text('OK'))
+            ],
+          );
+        });
   }
-}
-
-class CircleParada extends StatelessWidget {
-  final destino;
-  const CircleParada({Key? key, this.destino}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ElasticIn(
-      duration: Duration(milliseconds:1500 ),
-      delay: Duration(milliseconds: 700 ),
-      child: Container(
-        alignment: Alignment.center,
-        margin: EdgeInsets.symmetric(horizontal: 30),
-        width: 100,
-        height: 100,
-        decoration: BoxDecoration(
-            color: const Color(0xffEBE9D9),
-            border: Border.all(color: Colors.indigo, width:5),
-            shape: BoxShape.circle),
-        child: Text('${destino['nro']}', style: TextStyle(color: Color(0xff294171), fontSize: 35, fontWeight: FontWeight.w600,),),
-      ),
+   final size = MediaQuery.of(context).size; 
+    return Scaffold(
+      body: Container(
+        width: size.width,
+        height: size.height,
+        child: CustomPaint(
+          painter: BackgroundDestino(),
+          child: Column(
+            children: [
+              SizedBox(height: 30,),
+              _HeaderParada(),
+              SizedBox(height: 40,),
+              Text('Líneas sugeridas', style: TextStyle(fontSize: 18, color: Colors.white,),), 
+              SizedBox(height: 40,),
+              _ContentParada(),
+              SizedBox(height: 40,),
+              _ContentImage()
+            ],
+          ),
+        ),
+      )
     );
   }
 }
 
-class _HeaderDestino extends StatelessWidget {
-  const _HeaderDestino({
+class _ContentImage extends StatelessWidget {
+  const _ContentImage({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    return Expanded(
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Positioned( top: 20, child: _CircleBackground()), 
+            Image.asset('assets/imgs/totems.png'), 
+            Positioned( top:80 ,left:65, child: Image.asset('assets/imgs/nube-r1.png', scale: 7,)), 
+            Positioned( top:30 ,right:85, child: Image.asset('assets/imgs/nube-r2.png', scale: 7)), 
+            
+          ],
+        ),
+      ),
+    );
+  }
+}
+class _CircleBackground extends StatelessWidget {
+  const _CircleBackground({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 20),
-      width: size.width,
-      height: size.height * 0.15,
-      child: Row(
-        children:  [
-          SizedBox(
-            width: 15,
-          ),
-          GestureDetector(
-            child: Icon(
-              Icons.chevron_left,
-              size: 40,
-            ),
-            onTap:(){
-              Navigator.pop(context);
-            },
-          ),
-          Spacer(),
-          Text(
-            'Los Totems',
-            style: TextStyle(fontSize: 25, fontFamily: 'RobotoMono'),
-          ),
-          SizedBox(
-            width: 15,
-          )
-        ],
+      width: 250,
+      height: 250,
+      decoration: BoxDecoration(
+        color: Color(0xffea5055),
+        shape: BoxShape.circle
       ),
     );
   }
 }
 
-class BackgroundDestino extends StatelessWidget {
-  const BackgroundDestino({Key? key}) : super(key: key);
+class _ContentParada extends StatelessWidget {
+
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return FadeInUp(
+    return Stack(
+      children: [
+        Container(
+          width: size.width,
+          height: 150,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children:const [
+              CircleParada(imgs: 'assets/imgs/R16.png',),
+              CircleParada(imgs: 'assets/imgs/R22.png',),
+              CircleParada(imgs: 'assets/imgs/R25.png',),
+            ],
+          ),
+
+        ),
+        Positioned( top: 20, left: 230, child: NumParada()),
+        Positioned( top: 20, right: 20, child: NumParada()),
+      ],
+    );
+  }
+}
+
+class NumParada extends StatelessWidget {
+  const NumParada({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      width: 25,
+      height: 25,
+      decoration:BoxDecoration(
+        color: Color(0xffea5055),
+        shape: BoxShape.circle
+      ),
+      child: Text('2', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),),
+    );
+  }
+}
+
+class CircleParada extends StatelessWidget {
+
+  final String imgs;
+  const CircleParada({Key? key, required this.imgs}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 120,
+      height: 120,
+      decoration: BoxDecoration(
+        color: Colors.white, 
+        shape: BoxShape.circle,
+        border: Border.all(
+          width: 5,
+          color: Color(0xFF294971)
+        )
+      ),
+    child: Image.asset(imgs, scale: 7,),
+    );
+  }
+}
+
+class _HeaderParada extends StatelessWidget {
+  const _HeaderParada({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
       child: Container(
-        width: size.width,
-        height: size.height * 0.75,
-        color: Color.fromRGBO(202, 99, 94, 1),
-        child: Image.asset('assets/imgs/iglesia.png'),
+        padding: EdgeInsets.symmetric(horizontal: 30),
+        width: double.infinity,
+        child: Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.pushReplacementNamed(context, 'navbar');
+              },
+              child: Icon(Icons.arrow_back_ios_rounded, size: 30,color: Colors.white,)), 
+            const Spacer(),
+            const Text('Los Tótems', style: TextStyle(fontSize:20 ,  color: Colors.white,fontWeight: FontWeight.w700 ),)
+          ],
+        ),
       ),
     );
   }
+}
+
+class BackgroundDestino extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    
+    final pencil = Paint();
+    pencil.color = Color(0xFF294971);
+    pencil.style = PaintingStyle.fill; 
+    pencil.strokeWidth = 20;
+
+    final path = Path();
+    path.moveTo(0,0);
+    path.lineTo(0, size.height * 0.25);
+    path.quadraticBezierTo(size.width * 0.5, size.height * 0.18 , size.width, size.height * 0.25 );
+    path.lineTo(size.width, 0);
+  canvas.drawPath(path, pencil);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+
+
 }
