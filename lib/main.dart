@@ -1,6 +1,7 @@
 import 'package:buses_tesis/models/slider_models.dart';
 import 'package:buses_tesis/screens/screens.dart';
 import 'package:buses_tesis/service/navbar_service.dart';
+import 'package:buses_tesis/service/select_parada_service.dart';
 import 'package:buses_tesis/service/show_modal_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,10 +22,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => SliderModel(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => SelectParadaService(),
+        ),
       ],
       child: MaterialApp(
         title: 'Material App',
-        initialRoute: 'register', 
+        initialRoute: 'navbar', 
         debugShowCheckedModeBanner: false,
         routes: {
           'register': (context) => const RegisterScreen(),

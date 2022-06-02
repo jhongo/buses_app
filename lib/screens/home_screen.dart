@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
               HeaderHome(),
               SizedBox(height: 85,),
               _ContentSearch(),
-              SizedBox(height: 150,),
+              SizedBox(height: 30,),
               _ContainerImage()
 
             ],
@@ -44,15 +44,49 @@ class _ContainerImage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Expanded(
       child: Container(
+        // color: Colors.white,
         width: size.width,
         height: size.height,
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Positioned( top: 15, child: _CircleBackground()),
-            FadeInUp(child: Image.asset('assets/imgs/catedral.png'))
+            Positioned(top: 20,  child: _CircleBackground()),
+            Positioned(top: 70, left:100 ,  child: ZoomIn(child: Image.asset('assets/imgs/nube-r1.png', scale: 8,))),
+            Positioned(top: 30, right:90 ,  child: ZoomIn(child: Image.asset('assets/imgs/nube-r2.png', scale: 8,))),
+            Container(
+              // alignment: Alignment.bottomCenter,
+              height:double.infinity,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Positioned(bottom: 0, child: _PartImg(child: Image.asset('assets/imgs/ca-1.png', scale: 6,), index: 3)),
+                  Positioned(top: 115, child: _PartImg(child: Image.asset('assets/imgs/ca-3.png',scale: 6), index: 13)),
+                  Positioned(bottom: 0, child: _PartImg(child: Image.asset('assets/imgs/ca-2.png',scale: 6), index: 8)),
+                ],
+              ),
+            )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _PartImg extends StatelessWidget {
+
+  final Widget child;
+  final int index;
+  const _PartImg({
+    Key? key, required this.child, required this.index,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FadeInUp(
+      delay: Duration(milliseconds: index * 100),
+      duration: Duration(milliseconds: 300),
+      child: Container(
+        child: child
       ),
     );
   }
@@ -67,8 +101,8 @@ class _CircleBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return BounceInDown(
       child: Container(
-        width: 200,
-        height: 200,
+        width: 300,
+        height: 300,
         decoration: BoxDecoration(
           color: Color(0xffea5055),
           shape: BoxShape.circle

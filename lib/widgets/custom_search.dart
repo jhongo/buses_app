@@ -1,3 +1,5 @@
+import 'package:buses_tesis/class/utils.dart';
+import 'package:buses_tesis/screens/screens.dart';
 import 'package:flutter/material.dart';
 
 class CustomSearch extends StatelessWidget {
@@ -9,8 +11,11 @@ class CustomSearch extends StatelessWidget {
       width: 400,
       height: 60,
       alignment: Alignment.bottomLeft,
-      decoration: const BoxDecoration(color: Colors.white, boxShadow: [
-        BoxShadow(
+      decoration: BoxDecoration(
+        color: Colors.white, 
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
             color: Colors.grey,
             offset: Offset(2, 2),
             blurRadius: 5,
@@ -22,6 +27,9 @@ class CustomSearch extends StatelessWidget {
             child: Container(
               width: double.infinity,
               height: double.infinity,
+              decoration: BoxDecoration(
+                 
+              ),
               child: TextField(
                 onTap: () {
                   showSearch(context: context, delegate: MySearchDelegate());
@@ -35,8 +43,11 @@ class CustomSearch extends StatelessWidget {
           Container(
             width: 50,
             height: double.infinity,
+            decoration:const BoxDecoration(
             color: Color(0xff294171),
-            child: Icon(
+              borderRadius: BorderRadius.only(bottomRight: Radius.circular(10), topRight: Radius.circular(10) )
+            ),
+            child: const Icon(
               Icons.search,
               color: Colors.white,
             ),
@@ -112,7 +123,9 @@ class MySearchDelegate extends SearchDelegate {
           return ListTile(
             title: Text(results),
             onTap: () {
-              Navigator.pushReplacementNamed(context, 'destino');
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DestinoScreen(),));
+              // displayDialogIOS(context);
+              displayDialogAndroid(context);
             },
           );
         });

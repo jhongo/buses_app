@@ -86,7 +86,7 @@ class _NumCard extends StatelessWidget {
             decoration: BoxDecoration(
                 color: Color(0xFFc4c7c5),
                 borderRadius: BorderRadius.circular(5)),
-            child: Icon(
+            child:const Icon(
               Icons.monetization_on_outlined,
               color: Colors.white,
             ),
@@ -94,7 +94,7 @@ class _NumCard extends StatelessWidget {
           MaterialButton(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children:const [
                 Text(
                   'Consultar mi saldo',
                   style: TextStyle(
@@ -107,7 +107,7 @@ class _NumCard extends StatelessWidget {
               ],
             ),
             onPressed: () {
-              displayDialogIOS(context);
+              _displayDialogIOS(context);
             },
           )
         ],
@@ -116,7 +116,7 @@ class _NumCard extends StatelessWidget {
   }
 }
 
-void displayDialogIOS(BuildContext context) {
+void _displayDialogIOS(BuildContext context) {
   showCupertinoDialog(
       barrierDismissible: false,
       context: context,
@@ -130,7 +130,7 @@ void displayDialogIOS(BuildContext context) {
               SizedBox(
                 height: 10,
               ),
-              // Image.asset('assets/gifs/busin_gino.gif')
+              Image.asset('assets/gifs/busin_gino.gif')
             ],
           ),
           actions: [

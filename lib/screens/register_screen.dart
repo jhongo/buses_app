@@ -18,15 +18,49 @@ class RegisterScreen extends StatelessWidget {
               SizedBox(height: 400,),
               _TextContinue(),
               SizedBox(height: 50,),
-              _TagRegister(text: 'Continuar con Facebook', icon: FontAwesomeIcons.facebookF, ),
+              _SocialNetworkButton(text: 'Continuar con Facebook', icon: FontAwesomeIcons.facebookF ),
               SizedBox(height: 30,),
-              _TagRegister(text: 'Continuar con Google', icon: FontAwesomeIcons.google,),
+              _SocialNetworkButton(text: 'Continuar con Google', icon: FontAwesomeIcons.google,),
               SizedBox(height: 30,),
-              Text('Registrarme', style: TextStyle(color: Color(0xff294171),fontSize: 17 ),)
+              Text('Registrarme', style: TextStyle(color: Color(0xff294171),fontSize: 17 ),),
             ],
           ),
         ),
       )
+    );
+  }
+}
+
+class _SocialNetworkButton extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  const _SocialNetworkButton({
+    Key? key, 
+    required this.icon, 
+    required this.text,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      child: MaterialButton(
+        height: 65,
+        color: Color(0xff294171),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(width: 20,),
+            FaIcon(icon, color: Colors.white,),
+            SizedBox(width: 40,),
+            Text(text, style: TextStyle(color: Colors.white, fontSize: 15), )
+          ],
+        ),
+        onPressed:() {
+          Navigator.pushReplacementNamed(context, 'select');
+        },
+        ),
     );
   }
 }
@@ -45,7 +79,7 @@ class _TagRegister extends StatelessWidget {
     return GestureDetector(
 
       onTap: () {
-        Navigator.pushReplacementNamed(context, 'select');
+        
       },
       child: Container(
         width: 320,
@@ -54,13 +88,7 @@ class _TagRegister extends StatelessWidget {
           color: Color(0xff294171),
           borderRadius: BorderRadius.circular(5)
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            FaIcon(icon, color: Colors.white,),
-            Text( text, style: TextStyle(color: Colors.white, fontSize: 16),)
-          ],
-        ),
+        child: _SocialNetworkButton(text: text, icon: icon,)
       ),
     );
   }

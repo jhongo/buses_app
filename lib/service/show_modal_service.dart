@@ -10,6 +10,7 @@ class ModalService extends ChangeNotifier {
 
   set isActiveSet (bool active ){
     _isActive = active;
+    notifyListeners();
   }
 
   

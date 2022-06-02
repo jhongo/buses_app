@@ -1,45 +1,25 @@
-import 'package:flutter/cupertino.dart';
+import 'package:animate_do/animate_do.dart';
+import 'package:buses_tesis/class/utils.dart';
 import 'package:flutter/material.dart';
 
-class DestinoScreen extends StatelessWidget {
-
-     void displayDialogIOS(BuildContext context) {
-    showCupertinoDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (context) {
-          return CupertinoAlertDialog(
-            title: const Text('Titulo de Alerta'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                Text('Contenido del AlertDialog'),
-                SizedBox(
-                  height: 10,
-                ),
-                FlutterLogo(
-                  size: 100,
-                )
-              ],
-            ),
-            actions: [
-              TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child:const Text(
-                    'Cancelar',
-                    style: TextStyle(color: Colors.red),
-                  )),
-              TextButton(
-                  onPressed: () => Navigator.pop(context), child: Text('OK'))
-            ],
-          );
-        });
-  }
+class DestinoScreen extends StatefulWidget {
 
   @override
+  State<DestinoScreen> createState() => _DestinoScreenState();
+}
+
+class _DestinoScreenState extends State<DestinoScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-   final size = MediaQuery.of(context).size; 
+   final size = MediaQuery.of(context).size;
+  //  displayDialogIOS(context);
     return Scaffold(
+      backgroundColor: Color(0xffebe9d9),
       body: Container(
         width: size.width,
         height: size.height,
@@ -47,14 +27,14 @@ class DestinoScreen extends StatelessWidget {
           painter: BackgroundDestino(),
           child: Column(
             children: [
-              SizedBox(height: 30,),
-              _HeaderParada(),
-              SizedBox(height: 40,),
-              Text('Líneas sugeridas', style: TextStyle(fontSize: 18, color: Colors.white,),), 
-              SizedBox(height: 40,),
+              const SizedBox(height: 30,),
+              const _HeaderParada(),
+              const SizedBox(height: 40,),
+              const Text('Líneas sugeridas', style: TextStyle(fontSize: 18, color: Colors.white,),), 
+              const SizedBox(height: 60,),
               _ContentParada(),
-              SizedBox(height: 40,),
-              _ContentImage()
+              const SizedBox(height: 40,),
+              const _ContentImage()
             ],
           ),
         ),
@@ -77,7 +57,7 @@ class _ContentImage extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Positioned( top: 20, child: _CircleBackground()), 
+            Positioned( top: 20, child: _CircleBackground()),
             Image.asset('assets/imgs/totems.png'), 
             Positioned( top:80 ,left:65, child: Image.asset('assets/imgs/nube-r1.png', scale: 7,)), 
             Positioned( top:30 ,right:85, child: Image.asset('assets/imgs/nube-r2.png', scale: 7)), 
@@ -120,9 +100,9 @@ class _ContentParada extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children:const [
-              CircleParada(imgs: 'assets/imgs/R16.png',),
-              CircleParada(imgs: 'assets/imgs/R22.png',),
-              CircleParada(imgs: 'assets/imgs/R25.png',),
+              CircleParada(imgs: 'assets/imgs/R16.png',index: 1,),
+              CircleParada(imgs: 'assets/imgs/R22.png',index: 2, ),
+              CircleParada(imgs: 'assets/imgs/R25.png',index: 3,),
             ],
           ),
 
@@ -139,15 +119,18 @@ class NumParada extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      width: 25,
-      height: 25,
-      decoration:BoxDecoration(
-        color: Color(0xffea5055),
-        shape: BoxShape.circle
+    return FadeIn(
+      delay: Duration(milliseconds: 1500),
+      child: Container(
+        alignment: Alignment.center,
+        width: 25,
+        height: 25,
+        decoration:BoxDecoration(
+          color: Color(0xffea5055),
+          shape: BoxShape.circle
+        ),
+        child: Text('2', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),),
       ),
-      child: Text('2', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),),
     );
   }
 }
@@ -155,22 +138,26 @@ class NumParada extends StatelessWidget {
 class CircleParada extends StatelessWidget {
 
   final String imgs;
-  const CircleParada({Key? key, required this.imgs}) : super(key: key);
+  final int index;
+  const CircleParada({Key? key, required this.imgs, required this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 120,
-      height: 120,
-      decoration: BoxDecoration(
-        color: Colors.white, 
-        shape: BoxShape.circle,
-        border: Border.all(
-          width: 5,
-          color: Color(0xFF294971)
-        )
+    return FadeInLeft(
+      delay: Duration(milliseconds: index * 300 ),
+      child: Container(
+        width: 120,
+        height: 120,
+        decoration: BoxDecoration(
+          color: Color(0xffebe9d9), 
+          shape: BoxShape.circle,
+          border: Border.all(
+            width: 5,
+            color: Color(0xFF294971)
+          )
+        ),
+      child: Image.asset(imgs, scale: 7,),
       ),
-    child: Image.asset(imgs, scale: 7,),
     );
   }
 }

@@ -302,42 +302,49 @@ class _SliderImageState extends State<_SliderImage> {
           controller: pageViewController,
           physics: BouncingScrollPhysics(),
           children: [
-            Column(
+
+           Stack(
+             alignment: Alignment.center,
+             children: [
+               Positioned(top: 20, child: _TextPlace(namePlace: 'Coliseo')),
+               Positioned(bottom: 148, child: _PartImg(child: Image.asset('assets/imgs/co-3.png', scale: 8,), index: 5)),
+               Positioned(bottom: 3, child: _PartImg(child: Image.asset('assets/imgs/co-2.png', scale: 6,), index: 2)),
+               Positioned(bottom: 0, child: _PartImg(child: Image.asset('assets/imgs/co-1.png', scale: 6,), index: 1)),
+             ],
+           ),
+
+           Stack(
+             alignment: Alignment.center,
+             children: [
+                Positioned(top: 20, child: _TextPlace(namePlace: 'Centenario')),
+               Positioned( bottom: 0, child: _PartImg(child: Image.asset('assets/imgs/ce-1.png', scale: 6,) , index: 1)),
+               Positioned( top: 150,right: 107, child: _PartImg( child: Image.asset('assets/imgs/ce-2.png', scale: 6,) , index: 2)),
+               Positioned( top: 122,right: 140, child: _PartImg(child: Image.asset('assets/imgs/ce-3.png', scale: 6,) , index: 3))
+
+             ],
+           ),
+
+            Stack(
+              alignment: Alignment.center,
               children: [
-                SizedBox(height: 30,),
-                _TextPlace(namePlace: 'Coliseo'),
-                Spacer(),
-                FadeInUp(child: Image.asset('assets/imgs/coliseo.png')),
-              ],
-            ),
-            Column(
-              children: [
-                SizedBox(height: 30,),
-                _TextPlace(namePlace: 'Centenario'),
-                Spacer(),
-                FadeInUp(child: Image.asset('assets/imgs/centenario.png')),
+                Positioned(top: 20, child: _TextPlace(namePlace: 'Redondel')),
+                Positioned(top: 110, child: _PartImg(child: Image.asset('assets/imgs/mon4.png',scale: 5,),index: 4, )),
+                Positioned(top:190 , child: _PartImg(child: Image.asset('assets/imgs/mon3.png',scale: 5, ),index: 3, )),
+                Positioned(bottom: 29, child: _PartImg(child: Image.asset('assets/imgs/mon2.png',scale: 5, ),index: 2, )),
+                Positioned(bottom: 5, child: _PartImg(child: Image.asset('assets/imgs/mon1.png',scale: 5, ),index: 1, )),
               ],
             ),
 
             Stack(
               alignment: Alignment.center,
               children: [
-                Positioned(top: 20, child: _TextPlace(namePlace: 'Redondel')),
-                Positioned(top: 87, child: _PartImg(child: Image.asset('assets/imgs/mon4.png',scale: 5,),index: 4, )),
-                Positioned(top:170 , child: _PartImg(child: Image.asset('assets/imgs/mon3.png',scale: 5, ),index: 3, )),
-                Positioned(bottom: 29, child: _PartImg(child: Image.asset('assets/imgs/mon2.png',scale: 5, ),index: 2, )),
-                Positioned(bottom: 5, child: _PartImg(child: Image.asset('assets/imgs/mon1.png',scale: 5, ),index: 1, )),
+                Positioned(top: 20, child: _TextPlace(namePlace: 'Los Totems')),
+                Positioned(bottom: 0,left: 70, child: _PartImg(child: Image.asset('assets/imgs/to-1.png', scale: 6,), index: 1)),
+                Positioned(bottom: 0,left: 140, child: _PartImg(child: Image.asset('assets/imgs/to-2.png', scale: 6), index: 2)),
+                Positioned(bottom: 0, right: 140, child: _PartImg(child: Image.asset('assets/imgs/to-3.png', scale: 6), index: 3)),
+                Positioned(bottom: 0,right: 70, child: _PartImg(child: Image.asset('assets/imgs/to-4.png', scale: 6), index: 4)),
               ],
-            ),
-
-            Column(
-              children: [
-                SizedBox(height: 30,),
-                _TextPlace(namePlace: 'Los Totems'),
-                Spacer(),
-                FadeInUp(child: Image.asset('assets/imgs/totems.png')),
-              ],
-            ),
+            )
           ],
         ),
       ),

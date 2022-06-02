@@ -1,24 +1,6 @@
-List paradaTotems = [
- 
-  {
-    'nro' : 12
-  },
-  {
-    'nro' : 18
-  },
-  {
-    'nro' : 20
-  },
-  {
-    'nro' : 26
-  },
-  {
-    'nro' : 32
-  },
-  {
-    'nro' : 44
-  },
-  {
-    'nro' : 100
-  },
+List imgs = [
+
+   'assets/imgs/alto-r1.png',
+   'assets/imgs/alto-r2.png',
+   'assets/imgs/bus-r4.png',
 ];

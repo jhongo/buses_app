@@ -1,3 +1,4 @@
+import 'package:buses_tesis/models/paradas_models.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 
@@ -15,12 +16,12 @@ class SelectAvatarScreen extends StatelessWidget {
         child: CustomPaint(
           painter: BackgroundSelected(),
           child: Column(
-            children:const [
-              _TitleSelectedAvatar(),
-              SizedBox(height: 100,),
+            children: [
+              const _TitleSelectedAvatar(),
+              const SizedBox(height: 100,),
               _SliderAvatar(),
-              SizedBox(height: 55,),
-              _ButtonContinuar()
+              const SizedBox(height: 55,),
+              const _ButtonContinuar()
             ],
           ),
         )
@@ -83,9 +84,8 @@ class _ButtonContinuar extends StatelessWidget {
 }
 
 class _SliderAvatar extends StatelessWidget {
-  const _SliderAvatar({
-    Key? key,
-  }) : super(key: key);
+
+  List avatars = imgs;
 
   @override
   Widget build(BuildContext context) {
@@ -101,13 +101,16 @@ class _SliderAvatar extends StatelessWidget {
           width: size.width,
           height: size.height * 0.3,
             child: Swiper(
-              itemCount: 10,
+              itemCount: avatars.length,
               viewportFraction: 0.6,
               scale: 0.8,
               itemBuilder: (BuildContext context, int index) {
             return Container(
-              color: Colors.white,
-              child: Image.asset('assets/imgs/bus-r4.png',scale: 10 ,),
+              decoration: BoxDecoration(
+               color: Colors.indigo,
+                borderRadius: BorderRadius.circular(5)
+              ),
+              child: Image.asset(avatars[index],scale: 10 ,),
             );
         },
 ),
