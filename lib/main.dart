@@ -28,18 +28,18 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Material App',
-        initialRoute: 'navbar', 
+        initialRoute: 'register',
         debugShowCheckedModeBanner: false,
         routes: {
           'register': (context) => const RegisterScreen(),
           'home': (context) => const HomeScreen(),
           'mapa': (context) => const MapaScreen(),
           'lineas': (context) => const LineasScreen(),
-          'perfil': (context) =>  PerfilScreen(),
+          'perfil': (context) => PerfilScreen(),
           'select': (context) => const SelectAvatarScreen(),
           'navbar': (context) => const NavBarScreen(),
           'destino': (context) => DestinoScreen(),
-          'parada' :(context) => ParadaScreen(),
+          'parada': (context) => ParadaScreen(),
         },
       ),
     );
